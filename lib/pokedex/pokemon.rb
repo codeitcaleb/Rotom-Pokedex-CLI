@@ -1,9 +1,10 @@
 class Pokemon
-    attr_accessor :dex_number, :name, :type, :secondary_type 
+    attr_accessor :name
 
-    def initialize(name, type, secondary_type = nil )
+    @@all = []
+
+    def initialize(name)
         @name = name
-        @type = type
-        
+        @@all << self
     end
 end

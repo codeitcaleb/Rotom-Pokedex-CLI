@@ -8,14 +8,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Caleb Kavanaugh"]
   spec.email         = ["calebck@hotmail.com"]
 
-  spec.summary       = %q{"Write a short summary, because RubyGems requires one."}
-  spec.description   = %q{"Write a longer description or delete this line."}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{"This is a Ruby Data Gem of a Pokedex CLI for the 1st project at Flatiron School."}
+  spec.homepage      = "https://www.calebkavanaugh.com/portfolio/projects/rotomdex-cli-ruby-gem"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/codeitcaleb/cli-rotomdex-fs-online-ft-081219"
   spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.

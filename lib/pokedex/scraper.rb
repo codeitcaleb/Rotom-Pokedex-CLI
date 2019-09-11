@@ -1,16 +1,30 @@
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
- 
-html = open("https://pokemondb.net/pokedex/national")
-pokemon = Nokogiri::HTML(html)
 
-pokemon.css("small").text
+class Scraper
 
+    URL = 'https://pokemondb.net/pokedex/national'
+
+
+    def self.scrape_pokedex 
+       doc = Nokogiri::HTML(open(URL))
+       doc.css(".infocard").each do |pokemon|
+
+         url = 'https://pokemondb.net/pokedex/national'
+
+         name = pokemon.css(".ent-name").text
+       end
+       Pokemon.new(name)
+    end
+end 
+
+
+# binding.pry
 
 # pokemon_name = pokemon.css(".ent-name").text
 
-binding.pry
+
 
 # This grabs all 809 Pokemon by infocard
 #pry(main)> pokemon.css(".infocard")
