@@ -12,10 +12,10 @@ class Pokemon
     def self.all
         @@all
     end
-
+    
     def self.find_by_name(name)
         self.all.select {|pokemon| pokemon.name}
     end
 
-    
+
 end

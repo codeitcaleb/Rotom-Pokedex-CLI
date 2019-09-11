@@ -15,14 +15,18 @@ class Scraper
          #picture = doc.css("img-sprite")
 
          #image = picture.attr('data-src')
-         name = doc.css(".ent-name").text
-         type = doc.css("small a").each {|type| type.text}
+         name = pokemon.css(".ent-name").text
+         
+         type = pokemon.css("small a").map do |type| 
+            type.text
+         end
          
          Pokemon.new(name, type)
        end
-       return
+       binding.pry
+       #    return
     end
-   # binding.pry
+    
 end 
 
 

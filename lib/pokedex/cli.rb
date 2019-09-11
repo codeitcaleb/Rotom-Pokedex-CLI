@@ -2,8 +2,8 @@
 class CLI
   
   def run
-    welcome
-    scrape_pokedex
+     scrape_pokedex
+     welcome
     pokedex_menu
   end
 
@@ -13,7 +13,8 @@ class CLI
     sleep 2
       puts "Loading Pokemon..."
     sleep 2
-      puts "Please state name:"
+      scrape_pokedex
+    puts "Please state name:"
       name = gets.chomp
     sleep 2
       puts "User registration complete."
@@ -31,13 +32,14 @@ class CLI
     when reply == y
       pokedex_menu
     when reply == n 
-      puts "Bye #{name}!"
+      puts "Bye #{name}! See you next time."
     end
   end
       
 
   def pokedex_menu 
       Choose Pokemon by name
+      Pokemon.all.find_by name
       Choose Pokemon by type
   end
 
