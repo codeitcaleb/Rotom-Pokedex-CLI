@@ -14,7 +14,8 @@ class CLI
       puts "Loading Pokemon..."
     sleep 2
       scrape_pokedex
-    puts "Please state name:"
+      puts "Welcome User!"  
+      puts "Please state name:"
       name = gets.chomp
     sleep 2
       puts "User registration complete."
@@ -25,22 +26,37 @@ class CLI
     sleep 3
       puts "The Rotomdex is a self-learning Pokedex that updates its data each and everytime it meets a new Pokemon. "
     sleep 3
-      puts " Want to see what I know?   y/n"
+      puts "Want to see what I know?   y/n"
     reply = gets.chomp
 
     case 
-    when reply == y
+    when reply == "y"
       pokedex_menu
-    when reply == n 
+    when reply == "n"
       puts "Bye #{name}! See you next time."
     end
   end
-      
 
   def pokedex_menu 
-      Choose Pokemon by name
-      Pokemon.all.find_by name
-      Choose Pokemon by type
+      puts "Choose Pokemon by number:"
+      puts "Choose Pokemon by name:"
+      puts "Choose Pokemon by type:"
+      reply = gets.chomp
+
+      case 
+        when reply == "number"
+          puts "Here are all of the Pokemon by number: "
+            Pokemon.all.each_with_index {|pokemon, index| puts "#{index}. #{pokemon.name}"}
+            binding.pry
+        when reply == "name"
+          puts "Which Pokemon do you want to learn more about?"
+           name = gets.chomp
+           Pokemon.all.find_by_name(name)
+        when reply == "type"
+           type = gets.chomp
+           Pokemon.all.find_by_type(type)
+      end
+
   end
 
   def scrape_pokedex

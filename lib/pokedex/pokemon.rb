@@ -13,9 +13,13 @@ class Pokemon
         @@all
     end
     
+
+    
     def self.find_by_name(name)
         self.all.select {|pokemon| pokemon.name}
     end
 
-
+    def self.find_by_type(type)
+        self.all.select {|pokemon| pokemon.type}
+    end
 end

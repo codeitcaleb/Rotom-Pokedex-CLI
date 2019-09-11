@@ -17,13 +17,11 @@ class Scraper
          #image = picture.attr('data-src')
          name = pokemon.css(".ent-name").text
          
-         type = pokemon.css("small a").map do |type| 
-            type.text
-         end
+         type = pokemon.css("small a").map {|type| type.text}
          
          Pokemon.new(name, type)
        end
-       binding.pry
+       #binding.pry
        #    return
     end
     
