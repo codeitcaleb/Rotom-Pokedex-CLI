@@ -9,19 +9,17 @@ class Scraper
 
     def self.scrape_pokedex 
        doc = Nokogiri::HTML(open(URL))
-       doc.css(".infocard").each do |pokemon|
+       doc.css(".infocard")[0...151].each do |pokemon|
         
-         url = 'https://pokemondb.net/pokedex/national'
          #picture = doc.css("img-sprite")
-
          #image = picture.attr('data-src')
+
          name = pokemon.css(".ent-name").text
          
          type = pokemon.css("small a").map {|type| type.text}
-         
+       
          Pokemon.new(name, type)
        end
-       #binding.pry
        #    return
     end
     

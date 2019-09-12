@@ -4,7 +4,7 @@ class CLI
   def run
      scrape_pokedex
      welcome
-    pokedex_menu
+     pokedex_menu
   end
 
   def welcome 
@@ -46,8 +46,7 @@ class CLI
       case 
         when reply == "number"
           puts "Here are all of the Pokemon by number: "
-            Pokemon.all.each_with_index {|pokemon, index| puts "#{index}. #{pokemon.name}"}
-            binding.pry
+              Pokemon.gen_one
         when reply == "name"
           puts "Which Pokemon do you want to learn more about?"
            name = gets.chomp

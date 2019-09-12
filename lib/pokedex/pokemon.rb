@@ -13,8 +13,10 @@ class Pokemon
         @@all
     end
     
+    def self.gen_one
+        self.all[0..150].each_with_index {|pokemon, index| puts "#{index + 1}. #{pokemon.name}"}
+    end
 
-    
     def self.find_by_name(name)
         self.all.select {|pokemon| pokemon.name}
     end
