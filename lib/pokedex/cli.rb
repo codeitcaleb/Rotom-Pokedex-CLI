@@ -1,76 +1,75 @@
-
 class CLI
   
   def run
-     scrape_pokedex
      welcome
-     pokedex_menu
+     response
+    
   end
 
   def welcome 
     puts "Pokedex now booting up..."
     
-    sleep 2
+    sleep 1
       puts "Loading Pokemon..."
     sleep 1
       scrape_pokedex
-      puts "Welcome User!"  
-      puts "Please state name:"
-      name = gets.chomp
+      puts "Welcome User! Please state name:"
+      user_name = gets.chomp
     #sleep 2
       puts "User registration complete."
     #sleep 3
-      puts "Hello! Pleased to meet you, User #{name}."
+      puts "Hello! Pleased to meet you, User #{user_name}."
     #sleep 3
       puts "I am Pokedex version Rotom but you can call me Rotomdex."
     #sleep 3
       puts "The Rotomdex is a self-learning Pokedex that updates its data each and everytime it meets a new Pokemon. "
     #sleep 3
-      puts "Want to see what I know?   y/n"
+  end
+
+  def response
+      puts "Want to see what I know?   (y/n)"
       
       reply = gets.chomp
       
+      case reply
+      when "y"
+        pokedex_menu
+      when "n"
+        puts "Bye Trainer #{user_name}! See you next time."
+       sleep 1
+        return
+      end
 
-    case 
-    when reply == "y"
-      pokedex_menu
-
-    when reply == "n"
-      puts "Bye #{name}! See you next time."
-    end
   end
 
   def pokedex_menu 
-      puts "Choose Pokemon by generation:"
-      # puts "Choose Pokemon by number:"
-      puts "Choose Pokemon by name:"
-      puts "Choose Pokemon by type:"
+      puts "To choose a Pokemon by generation, type generation:"
+      # puts "To choose a Pokemon by number, type number:"
+      puts "To choose a Pokemon by name, type name:"
+      
       reply = gets.chomp
 
-      case
-      when reply == "generation"
-        generation  
-        puts "Here are all of the Pokemon by number: "
-            #   Pokemon.kanto_gen_one
-
-            #   puts " Please select a pokemon by number."
-            #   reply = gets.chomp.to_i
-            #  # if  reply == 
-
-              
-        when reply == "name"
-          puts "Which Pokemon do you want to learn more about?"
-           name = gets.chomp
-           Pokemon.all.find_by_name(name)
-        # when reply == "type"
-        #    type = gets.chomp
-        #    Pokemon.all.find_by_type(type)
+      case reply
+      when "generation"
+           generation
+      when "name"
+           names
+      when "exit"
+        puts "Good Bye User! See you next time."
+       sleep 1 
+        return
+      else
+        puts "Does not compute, does not compute!"
+       sleep 1
+        puts "Please try again."
+       sleep 2
+        pokedex_menu
       end
 
   end
 
   def generation
-      puts "Choose a generation:"
+      puts "Choose a generation by number:"
       puts "1. Kanto"
       puts "2. Johto"
       puts "3. Hoenn"
@@ -79,41 +78,56 @@ class CLI
       puts "6. Kalos"
       puts "7. Alola"
 
-     reply = gets.chomp
-     
-      case reply
-      when reply == "Kanto" || "1"
-        Pokemon.kanto_gen_one
+      reply = gets.chomp
 
-      when reply == "Johto" || "2"
-        Pokemon.johto_gen_two
+      puts "Here are the Pokemon in Generation #{reply}."
+
+      # list_pokemon = Pokemon.find_by_generation_number(reply.to_i)
+
+      Pokemon.find_by_generation_number(reply.to_i).each {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
+      
+      number = gets.chomp
+      
+      # binding.pry
+
+      # case reply
+      # when Pokemon.find_by_generation_number(reply.to_i)
+      #   puts "Here are all of the Pokemon in Generation  #{reply}:"
+      #   puts Pokemon.all.find_by_generation_number(reply.to_i)
         
-      when reply == "Hoenn" || "3"
-        Pokemon.hoenn_gen_three
-
-      when reply == "Sinnoh" || "4"
-        Pokemon.sinnoh_gen_four
-
-      when reply == "Unova"  || "5"
-        Pokemon.unova_gen_five
-
-      when reply == "Kalos" || "6"
-        Pokemon.kalos_gen_six
-
-      when reply == "Alola" || "7"
-        Pokemon.alola_gen_seven
-        # Make a default cause and have it return to menu.
-      end
-      return_pokemon
-    #  puts "Here are all of the Pokemon by number: "
+      # when "exit!"
+      #   return
+      # else
+      #   puts "Does not compute, does not compute!"
+      #  sleep 1
+      #   puts "Please try again."
+      #  sleep 4
+      #   pokedex_menu
+      # end
+        
   end
 
-  def return_pokemon
-    puts "Choose a number:"
-    
-    reply = gets.chomp
-    
-    binding.pry
+  def names
+      puts "Which Pokemon do you want to learn more about?"
+      
+      reply = gets.chomp
+      Pokemon.all.find_by_name.include?(reply)
+
+      case reply
+      when Pokemon.all.find_by_name.include?(reply)
+        return_pokemon(reply)
+      when "exit"
+          puts "Goodbye User! See you next time."
+          return
+      end
+  end
+
+  def return_pokemon(reply)
+      pokemon = Pokemon.find_by_name(reply)
+     sleep 1
+      puts "Name: #{pokemon.name}"
+     sleep 1 
+      puts "Type: #{pokemon.type}"
   end
 
   def scrape_pokedex
