@@ -21,15 +21,13 @@ class Pokemon
     
     def self.all_pokemon
         self.all.each {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
-    end 
-
-    def self.find_by_number(number)
-        self.all.select {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
     end
     
-    def self.find_by_name(name)
+    def self.find_by_input(input)
         # self.all.select {|pokemon| pokemon.name}
-        self.all.select{|pokemon| pokemon.name == name}
+        self.all.find do |pokemon|
+             input == pokemon.name || pokemon.number
+        end
     end
 
 end

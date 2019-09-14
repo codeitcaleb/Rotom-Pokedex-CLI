@@ -2,8 +2,10 @@ source "https://rubygems.org"
 
 
 # Specify your gem's dependencies in cli-rotomdex.gemspec
-gemspec
+# gemspec
 
-gem 'open-uri'
+# gem 'open-uri'
 gem 'nokogiri'
 gem 'pry'
+# gem 'catpix'
+# gem 'mini_magick'

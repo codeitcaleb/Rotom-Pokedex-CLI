@@ -3,7 +3,6 @@ class CLI
   def run
      welcome
      response
-    
   end
 
   def welcome 
@@ -88,22 +87,9 @@ class CLI
       
       number = gets.chomp
       
-      # binding.pry
-
-      # case reply
-      # when Pokemon.find_by_generation_number(reply.to_i)
-      #   puts "Here are all of the Pokemon in Generation  #{reply}:"
-      #   puts Pokemon.all.find_by_generation_number(reply.to_i)
-        
-      # when "exit!"
-      #   return
-      # else
-      #   puts "Does not compute, does not compute!"
-      #  sleep 1
-      #   puts "Please try again."
-      #  sleep 4
-      #   pokedex_menu
-      # end
+      puts "Choose a Pokemon by number:"
+     
+      return_pokemon(number)
         
   end
 
@@ -122,12 +108,11 @@ class CLI
       end
   end
 
-  def return_pokemon(reply)
-      pokemon = Pokemon.find_by_name(reply)
-     sleep 1
-      puts "Name: #{pokemon.name}"
-     sleep 1 
-      puts "Type: #{pokemon.type}"
+  def return_pokemon(input)
+      pokemon = Pokemon.find_by_input(input)
+      puts "#{pokemon.name}"
+    sleep 1
+      puts "#{pokemon.type}"
   end
 
   def scrape_pokedex
