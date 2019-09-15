@@ -16,7 +16,7 @@ PLATFORMS
 DEPENDENCIES
   nokogiri
   pry
-  
+  colorize
 
 BUNDLED WITH
    2.0.2

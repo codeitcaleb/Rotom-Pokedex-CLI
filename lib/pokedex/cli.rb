@@ -1,32 +1,31 @@
 class CLI
-  
+
   def run
      welcome
      response
   end
 
   def welcome 
-    puts "Pokedex now booting up..."
-    
+     puts "Pokedex now booting up...".colorize(:cyan)
     sleep 1
-      puts "Loading Pokemon..."
+      puts "Loading Pokemon...".colorize(:cyan)
     sleep 1
       scrape_pokedex
-      puts "Welcome User! Please state name:"
+      puts "Welcome User! Please state name:".colorize(:cyan)
       user_name = gets.chomp
-    #sleep 2
-      puts "User registration complete."
-    #sleep 3
-      puts "Hello! Pleased to meet you, User #{user_name}."
-    #sleep 3
-      puts "I am Pokedex version Rotom but you can call me Rotomdex."
-    #sleep 3
-      puts "The Rotomdex is a self-learning Pokedex that updates its data each and everytime it meets a new Pokemon. "
-    #sleep 3
+    sleep 2
+      puts "User registration complete.".colorize(:cyan)
+    sleep 2
+      puts "Hello! Pleased to meet you, User #{user_name}.".colorize(:cyan)
+    sleep 2
+      puts "I am Pokedex version Rotom but you can call me Rotomdex.".colorize(:cyan)
+    sleep 2
+      puts "The Rotomdex is a self-learning Pokedex that updates its data each and everytime it meets a new Pokemon. ".colorize(:cyan)
+    sleep 2
   end
 
   def response
-      puts "Want to see what I know?   (y/n)"
+      puts "Want to see what I know?   (y/n)".colorize(:blue)
       
       reply = gets.chomp
       
@@ -34,7 +33,7 @@ class CLI
       when "y"
         pokedex_menu
       when "n"
-        puts "Bye Trainer #{user_name}! See you next time."
+        puts "Bye! See you next time."
        sleep 1
         return
       end
@@ -42,25 +41,25 @@ class CLI
   end
 
   def pokedex_menu 
-      puts "To choose a Pokemon by generation, type generation:"
-      # puts "To choose a Pokemon by number, type number:"
-      puts "To choose a Pokemon by name, type name:"
+      puts "The world of Pokemon is vast!".colorize(:cyan) 
+     sleep 1
+      puts "To make things easier to manage, I've sorted them into generations. ".colorize(:cyan)
+     sleep 1
+      puts "To choose a Pokemon by generation, type generation:".colorize(:blue)
       
       reply = gets.chomp
 
       case reply
       when "generation"
            generation
-      when "name"
-           names
       when "exit"
         puts "Good Bye User! See you next time."
        sleep 1 
         return
       else
-        puts "Does not compute, does not compute!"
+        puts "Does not compute, does not compute!".colorize(:red)
        sleep 1
-        puts "Please try again."
+        puts "Please try again.".colorize(:red)
        sleep 2
         pokedex_menu
       end
@@ -68,7 +67,7 @@ class CLI
   end
 
   def generation
-      puts "Choose a generation by number:"
+      puts "Choose a generation by number:".colorize(:blue)
       puts "1. Kanto"
       puts "2. Johto"
       puts "3. Hoenn"
@@ -79,40 +78,47 @@ class CLI
 
       reply = gets.chomp
 
-      puts "Here are the Pokemon in Generation #{reply}."
-
-      # list_pokemon = Pokemon.find_by_generation_number(reply.to_i)
+      puts "Here are the Pokemon in Generation #{reply}.".colorize(:cyan)
 
       Pokemon.find_by_generation_number(reply.to_i).each {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
+    
+      puts "Please choose a Pokemon by Dex number:".colorize(:blue)
+      puts "Note: Please type all 3 digits.".colorize(:cyan)
       
-      number = gets.chomp
+      input = gets.chomp
       
-      puts "Choose a Pokemon by number:"
-     
-      return_pokemon(number)
+      return_pokemon(input)
+      continue_or_exit
         
   end
 
-  def names
-      puts "Which Pokemon do you want to learn more about?"
-      
+  def continue_or_exit
+      puts "Would you like to continue?    (y/n)"
+
       reply = gets.chomp
-      Pokemon.all.find_by_name.include?(reply)
 
       case reply
-      when Pokemon.all.find_by_name.include?(reply)
-        return_pokemon(reply)
-      when "exit"
-          puts "Goodbye User! See you next time."
-          return
+      when "y"
+        pokedex_menu
+      when "n"
+        puts "Thanks for using the Rotomdex. Good Bye![^] _ [^]".colorize(:cyan)
+        return
+      else
+        puts "Does not compute, does not compute!".colorize(:red)
+       sleep 1
+        puts "Please try again!".colorize(:red)
+        continue_or_exit
       end
+
   end
 
   def return_pokemon(input)
-      pokemon = Pokemon.find_by_input(input)
-      puts "#{pokemon.name}"
-    sleep 1
-      puts "#{pokemon.type}"
+      @pokemon = Pokemon.find_by_input(input)
+      puts " [^] _ [^] "
+     sleep 1
+      puts "#{@pokemon.name}"
+     sleep 1
+      puts "#{@pokemon.type}"
   end
 
   def scrape_pokedex

@@ -1,9 +1,9 @@
 class Pokemon
-    attr_accessor :number, :name, :type, :generation_number
+    attr_accessor :generation_number, :number, :name, :type
 
     @@all = []
 
-    def initialize(number, name, type, generation_number)
+    def initialize(generation_number, number, name, type)
         @generation_number = generation_number
         @number = number
         @name = name
@@ -26,7 +26,7 @@ class Pokemon
     def self.find_by_input(input)
         # self.all.select {|pokemon| pokemon.name}
         self.all.find do |pokemon|
-             input == pokemon.name || pokemon.number
+             input == pokemon.number
         end
     end
 
