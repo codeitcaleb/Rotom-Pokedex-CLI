@@ -34,7 +34,7 @@ class CLI
         pokedex_menu
       when "n"
         puts "Bye! See you next time."
-       sleep 1
+       sleep 2
         return
       end
 
@@ -43,7 +43,7 @@ class CLI
   def pokedex_menu 
       puts "The world of Pokemon is vast!".colorize(:cyan) 
      sleep 1
-      puts "To make things easier to manage, I've sorted them into generations. ".colorize(:cyan)
+      puts "To make things easier to manage, I've sorted them by generation. ".colorize(:cyan)
      sleep 1
       puts "To choose a Pokemon by generation, type generation:".colorize(:blue)
       
@@ -51,7 +51,7 @@ class CLI
 
       case reply
       when "generation"
-           generation
+           list_generations
       when "exit"
         puts "Good Bye User! See you next time."
        sleep 1 
@@ -66,7 +66,7 @@ class CLI
 
   end
 
-  def generation
+  def list_generations
       puts "Choose a generation by number:".colorize(:blue)
       puts "1. Kanto"
       puts "2. Johto"
@@ -75,21 +75,42 @@ class CLI
       puts "5. Unova"
       puts "6. Kalos"
       puts "7. Alola"
+      choose_generation
+  end
 
-      reply = gets.chomp
+  def choose_generation
+      reply = gets.chomp 
 
-      puts "Here are the Pokemon in Generation #{reply}.".colorize(:cyan)
+      if reply.to_i <= 7 && reply.to_i > 0
+        puts "Here are the Pokemon in Generation #{reply}.".colorize(:cyan)
+        Pokemon.find_by_generation_number(reply.to_i).each {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
+        choose_pokemon
+      else
+        puts "Does not compute, does not compute!".colorize(:red)
+        sleep 1
+        puts "Please try again.".colorize(:red)
+        sleep 2
+        list_generations
+      end
+  end
 
-      Pokemon.find_by_generation_number(reply.to_i).each {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
-    
+  def choose_pokemon
+
       puts "Please choose a Pokemon by Dex number:".colorize(:blue)
       puts "Note: Please type all 3 digits.".colorize(:cyan)
       
       input = gets.chomp
       
-      return_pokemon(input)
-      continue_or_exit
-        
+      if input.to_i < 810 && input.to_i > 0
+        return_pokemon(input)
+        continue_or_exit
+      else
+        puts "Does not compute, does not compute!".colorize(:red)
+       sleep 1
+        puts "Please try again.".colorize(:red)
+       sleep 2
+        choose_pokemon
+      end
   end
 
   def continue_or_exit
@@ -114,11 +135,11 @@ class CLI
 
   def return_pokemon(input)
       @pokemon = Pokemon.find_by_input(input)
-      puts " [^] _ [^] "
+      puts " [^] _ [^] ".colorize(:green)
      sleep 1
-      puts "#{@pokemon.name}"
+      puts "#{@pokemon.name}".colorize(:magenta)
      sleep 1
-      puts "#{@pokemon.type}"
+      puts "#{@pokemon.type}".colorize(:magenta)
   end
 
   def scrape_pokedex
