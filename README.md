@@ -19,7 +19,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Follow the first prompt and type your name.
+2. You will be prompted with y for yes and n for no, choose y to continue and n to exit.
+3.Type generation in oreder to be prompted with a list of different generations to choose from.
+Select a generation by typing the corresponding number associated to your choice.
+4. Choose a Pokemon by it's number.
+5. When finished press y to continue and choose again and n to exit the program.
 
 ## Resources used
 https://pokemondb.net/pokedex/national
