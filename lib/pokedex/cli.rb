@@ -81,7 +81,7 @@ class CLI
   def choose_generation
       reply = gets.chomp 
 
-      if reply.to_i <= 7 && reply.to_i > 0
+      if reply.to_i <= 8 && reply.to_i > 0
         puts "Here are the Pokemon in Generation #{reply}.".colorize(:cyan)
         Pokemon.find_by_generation_number(reply.to_i).each {|pokemon| puts "#{pokemon.number}. #{pokemon.name}"}
         choose_pokemon
@@ -101,7 +101,7 @@ class CLI
       
       input = gets.chomp
       
-      if input.to_i < 810 && input.to_i > 0
+      if input.to_i < 890 && input.to_i > 0
         return_pokemon(input)
         continue_or_exit
       else
